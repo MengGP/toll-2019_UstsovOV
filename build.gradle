@@ -1,0 +1,4 @@
+project(':common'){
+ apply plugin: 'java'
+
+}
