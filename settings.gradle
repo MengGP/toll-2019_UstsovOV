@@ -1,1 +1,5 @@
 include 'common'
+include 'server-core'
+include 'server-ui'
+include 'tracker-core'
+include 'tracker-ui'
