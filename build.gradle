@@ -7,18 +7,30 @@ project(':common'){
 }
 
 project(':server-core'){
+    dependencies{
+        compile project(':common')
+    }
 
 }
 
 project(':server-ui'){
+    dependencies{
+        compile project(':common')
+    }
 
 }
 
 project(':tracker-core'){
+   dependencies{
+           compile project(':common')
+       }
 
 }
 
 project(':tracker-ui'){
+    dependencies{
+            compile project(':common')
+        }
 
 }
 
