@@ -32,9 +32,13 @@ project(':server-ui'){
 }
 
 project(':tracker-core'){
-   apply plugin: 'java-library-distribution' 
+   apply plugin: 'java-library-distribution'
+   apply plugin: 'gradle-one-jar'
    dependencies{
            compile project(':common')
+       }
+   task fatJar(type: OneJar) {
+           mainClass = 'menggp.tracker.Main'
        }
 
 }
@@ -44,5 +48,16 @@ project(':tracker-ui'){
             compile project(':common')
         }
 
+}
+
+apply plugin: 'gradle-one-jar'
+
+buildscript {
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath 'com.github.rholder:gradle-one-jar:1.0.4'
+    }
 }
 
