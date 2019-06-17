@@ -4,6 +4,7 @@ subprojects {
     // плагины
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
+    apply plugin: 'gradle-one-jar'
     
     // репозитории 
     repositories {
@@ -30,6 +31,10 @@ project(':server-core'){
     dependencies{
         compile project(':common')
     }
+    
+    task fatJar(type: OneJar) {
+        mainClass = 'menggp.server.Main'
+    }
 
 }
 
@@ -42,7 +47,7 @@ project(':server-ui'){
 
 project(':tracker-core'){
    
-   apply plugin: 'gradle-one-jar'
+   
    dependencies{
            compile project(':common')
        }
@@ -59,8 +64,8 @@ project(':tracker-ui'){
 
 }
 
-//apply plugin: 'gradle-one-jar'
 
+// репозитории и зависимости для работы gradle-one-jar 
 buildscript {
     repositories {
         mavenCentral()
