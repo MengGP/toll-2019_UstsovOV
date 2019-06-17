@@ -4,12 +4,16 @@ subprojects {
         mavenCentral()
         mavenLocal()
     }
+    dependencies{
+            compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
+            testCompile group: 'junit', name: 'junit', version: '4.12'
+        }
+    
 }
 
 project(':common'){
     dependencies{
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
-        testCompile group: 'junit', name: 'junit', version: '4.12'
     }
 }
 
