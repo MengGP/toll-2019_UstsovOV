@@ -1,71 +1,65 @@
-// блок применяемый для всех суброектов 
+// блок применяемый для всех суброектов
 subprojects {
-    
+
     // плагины
     apply plugin: 'java'
     apply plugin: 'java-library-distribution'
     apply plugin: 'gradle-one-jar'
-    
-    // репозитории 
+
+    // репозитории
     repositories {
         mavenCentral()
         mavenLocal()
     }
-    
+
     // зависимости
     dependencies{
             compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
             testCompile group: 'junit', name: 'junit', version: '4.12'
+            
+            compile project(':common')
+            testCompile project(':common')
         }
     
 }
 
+// ------------------------------- PROJECTs ------------------------------- 
 
+// --- субпроект "common"
 project(':common'){
     dependencies{
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
     }
 }
 
+// --- субпроект "server-core"
 project(':server-core'){
-    dependencies{
-        compile project(':common')
-    }
-    
     task fatJar(type: OneJar) {
         mainClass = 'menggp.server.Main'
     }
-
 }
 
+// --- субпроект "server-ui"
 project(':server-ui'){
-    dependencies{
-        compile project(':common')
-    }
-
 }
 
+// --- субпроект "tracker-core"
 project(':tracker-core'){
-   
-   
-   dependencies{
-           compile project(':common')
-       }
    task fatJar(type: OneJar) {
            mainClass = 'menggp.tracker.Main'
        }
-
 }
 
+// --- субпроект "tracker-ui"
 project(':tracker-ui'){
     dependencies{
             compile project(':common')
         }
-
 }
 
+// --------------------------------------------------------------
 
-// репозитории и зависимости для работы gradle-one-jar 
+// репозитории и зависимости для работы gradle-one-jar
 buildscript {
     repositories {
         mavenCentral()
