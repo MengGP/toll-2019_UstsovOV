@@ -15,5 +15,13 @@ public class PointDTOTestServer {
         pDTOTest.toJson();
     } // end method
 
+    @Test
+    // проверка обратного преобразования JSON - PointDTO
+    public void decodeDTO() throws Exception {
+        // работает аналогично методу toJson()
+        PointDTOTest pDTOTest = new PointDTOTest();
+        pDTOTest.decodeDto();
+    } // end method
+
 
 } // end_class
