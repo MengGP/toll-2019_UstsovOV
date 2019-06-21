@@ -16,9 +16,6 @@ subprojects {
     dependencies{
             compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
             testCompile group: 'junit', name: 'junit', version: '4.12'
-
-            compile project(':common')
-            testCompile project(':common')
         }
     
 }
@@ -30,10 +27,19 @@ project(':common'){
     dependencies{
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
     }
+    
+    task fatJar(type: OneJar) {
+        mainClass = 'menggp.server.Main'
+    }
 }
 
 // --- субпроект "server-core"
 project(':server-core'){
+    dependencies {
+        compile project(':common')
+        testCompile project(':common')
+    }
+
     task fatJar(type: OneJar) {
         mainClass = 'menggp.server.Main'
     }
@@ -41,10 +47,19 @@ project(':server-core'){
 
 // --- субпроект "server-ui"
 project(':server-ui'){
+    dependencies {
+        compile project(':common')
+        testCompile project(':common')
+    }
 }
 
 // --- субпроект "tracker-core"
 project(':tracker-core'){
+    dependencies {
+        compile project(':common')
+        testCompile project(':common')
+    }
+
    task fatJar(type: OneJar) {
            mainClass = 'menggp.tracker.Main'
        }
@@ -52,6 +67,11 @@ project(':tracker-core'){
 
 // --- субпроект "tracker-ui"
 project(':tracker-ui'){
+    dependencies {
+        compile project(':common')
+        testCompile project(':common')
+    }
+
     dependencies{
             compile project(':common')
         }
