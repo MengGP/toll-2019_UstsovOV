@@ -3,10 +3,12 @@ package menggp.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import java.io.IOException;
+
 /**
  *  Copy from toll-2017 on 13.06.2019
  */
-public class PointDTO {
+public class Point {
     private double lat;
     private double lon;
     private String autoId;
@@ -17,7 +19,7 @@ public class PointDTO {
         return lat;
     }
 
-    public void setLat(double lat) {
+    public void setLat(float lat) throws IOException {
         this.lat = lat;
     }
 
@@ -44,7 +46,7 @@ public class PointDTO {
 
     @Override
     public String toString() {
-        return "PointDTO{" +
+        return "Point{" +
                 "lat=" + lat +
                 ", lon=" + lon +
                 ", autoId='" + autoId + '\'' +
@@ -59,4 +61,5 @@ public class PointDTO {
     public long getTime() {
         return time;
     }
+
 }
