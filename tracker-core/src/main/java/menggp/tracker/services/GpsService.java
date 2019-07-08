@@ -15,13 +15,16 @@ public class GpsService {
     private void genreateCoordinate() {
         // rnd = (int)(Math.random()*6) +1;
 
-        // генерация случайных координат - упрощенных вариант - целые от 0 до 90
+        // генерация случайных координат, азимута и мгновенной скорости - упрощенных вариант
         int lat, lon, azimuth, instantSpeed;
 
         lat = (int)(Math.random()*91) +0;
         lon = (int)(Math.random()*91) +0;
         azimuth = (int)(Math.random()*361) +0;
         instantSpeed = (int)(Math.random()*91) +0;
+
+        System.out.println("lat = " + lat + ",lon = " + lon + ", azimuth = " + azimuth + ",instantSpeed = " + instantSpeed);
+
 
     }  // end_method genreateCoordinate()
 
