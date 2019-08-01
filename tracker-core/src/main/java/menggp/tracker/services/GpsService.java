@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
+import menggp.dto.*;
+
 /**
  *  Сервис эмулирующий работу GPS
  *      - генерирует координаты GPS, азимут и мгновенную скорость - по расписанию
@@ -66,7 +68,7 @@ public class GpsService {
 
     // @Scheduled(cron = "*/5 * * * * *")
     @Scheduled (fixedRateString = "${gpsDataDelay.prop}" )
-    private void genreateCoordinate() {
+    private void genreateCoordinates() {
         // rnd = (int)(Math.random()*6) +1;
 
         // генерация случайных координат, азимута и мгновенной скорости - упрощенных вариант
