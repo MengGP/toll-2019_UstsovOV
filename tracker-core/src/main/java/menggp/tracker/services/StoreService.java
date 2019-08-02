@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 import java.util.concurrent.BlockingDeque;
 import java.util.concurrent.LinkedBlockingDeque;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 
 
@@ -19,10 +21,18 @@ import java.util.concurrent.LinkedBlockingDeque;
 @Service
 public class StoreService {
 
+    // связанные классы
+    //------------------------------------------------------------------------
     @Autowired
     private GpsService gpsService;
 
+    // аттрибуты
+    //------------------------------------------------------------------------
+
+    private static final Logger Log = LoggerFactory.getLogger(StoreService.class);
+
     private BlockingDeque<String> queue = new LinkedBlockingDeque<>(1000);
+
     private int putCount;
 
 
@@ -35,12 +45,18 @@ public class StoreService {
 
         int i = putCount++;
 
+        Log.info("put count = " +i);
+        Log.info("\t ---> " + gpsService.getLat());
+        Log.info("\t ---> " + gpsService.getLon());
+        Log.info("\t ---> " + gpsService.getInstantSpeed());
+        Log.info("\t ---> " + gpsService.getAzimuth());
+        /*
         System.out.println("put count = " +i);
-
         System.out.println("\t ---> " + gpsService.getLat());
         System.out.println("\t ---> " + gpsService.getLon());
         System.out.println("\t ---> " + gpsService.getAzimuth());
         System.out.println("\t ---> " + gpsService.getInstantSpeed());
+        */
 
 
 
