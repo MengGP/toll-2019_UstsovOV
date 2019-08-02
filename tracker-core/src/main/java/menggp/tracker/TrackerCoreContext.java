@@ -1,6 +1,7 @@
 package menggp.tracker;
 
 import menggp.tracker.services.GpsService;
+import menggp.tracker.services.StoreService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
@@ -18,10 +19,14 @@ import org.springframework.scheduling.annotation.Scheduled;
 public class TrackerCoreContext {
 
     @Bean
-    public GpsService schedService() {
+    public GpsService gpsService() {
         return new GpsService();
     }
 
+    @Bean
+    public StoreService storeService() {
+        return new StoreService();
+    }
 
 
 

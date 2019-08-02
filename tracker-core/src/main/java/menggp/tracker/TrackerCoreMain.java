@@ -9,7 +9,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 public class TrackerCoreMain {
 
-    public static void main(String args[]) {
+    public static void main(String args[]) throws InterruptedException {
 
         ApplicationContext context = new AnnotationConfigApplicationContext(TrackerCoreContext.class);
 

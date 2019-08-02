@@ -14,14 +14,6 @@ import menggp.dto.*;
 @Service
 public class GpsService {
 
-//    @Value("${gpsDataDelay}")
-//    private static String gpsDataDelay;
-
-
-    @Value("${testString.prop}")
-    String testString;
-
-
     // аттрибуты
     //------------------------------------------------------------------------
     private int lat;
@@ -67,8 +59,8 @@ public class GpsService {
     //------------------------------------------------------------------------
 
     // @Scheduled(cron = "*/5 * * * * *")
-    @Scheduled (fixedRateString = "${gpsDataDelay.prop}" )
-    private void genreateCoordinates() {
+    // @Scheduled (fixedRateString = "${gpsDataDelay.prop}" )
+    public void genreateCoordinates() {
         // rnd = (int)(Math.random()*6) +1;
 
         // генерация случайных координат, азимута и мгновенной скорости - упрощенных вариант
@@ -76,10 +68,6 @@ public class GpsService {
         lon = (int)(Math.random()*91) +0;
         azimuth = (int)(Math.random()*361) +0;
         instantSpeed = (int)(Math.random()*91) +0;
-
-//        System.out.println("lat = " + lat + ",lon = " + lon + ", azimuth = " + azimuth + ",instantSpeed = " + instantSpeed);
-
-        System.out.println(testString);
 
     }  // end_method genreateCoordinate()
 
