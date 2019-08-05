@@ -1,6 +1,7 @@
 package menggp.tracker;
 
 import menggp.tracker.services.GpsService;
+import menggp.tracker.services.SendService;
 import menggp.tracker.services.StoreService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -28,6 +29,11 @@ public class TrackerCoreContext {
     @Bean       // сервис хранения собираемынх данных GPS
     public StoreService storeService() {
         return new StoreService();
+    }
+
+    @Bean       // сервис отправки местоположения ТС - в лог
+    public SendService sendService() {
+        return new SendService();
     }
 
     @Bean       // настройка многопоточности

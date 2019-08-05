@@ -45,10 +45,6 @@ public class Point {
         return lat;
     }
 
-    public void setLat(float lat) throws IOException {
-        this.lat = lat;
-    }
-
     public double getLon() {
         return lon;
     }

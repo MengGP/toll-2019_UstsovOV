@@ -9,18 +9,17 @@ public class Location {
 
     // делегируемый класс
     //--------------------------------------------------------------------------------------
-    Point point;
-
+    private Point point = new Point();
 
 
     // делегирование методов класса Point
     //--------------------------------------------------------------------------------------
-    public double getLat() {
-        return point.getLat();
+    public void setLat(double lat) {
+        point.setLat(lat);
     }
 
-    public void setLat(float lat) throws IOException {
-        point.setLat(lat);
+    public double getLat() {
+        return point.getLat();
     }
 
     public double getLon() {
@@ -69,7 +68,7 @@ public class Location {
 
     // методы
     //--------------------------------------------------------------------------------------
-    public static void meth() {}
+//    public static void meth() {}
 
 
 
