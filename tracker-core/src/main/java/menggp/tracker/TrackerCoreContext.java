@@ -20,17 +20,17 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 @PropertySource("classpath:/app.properties")
 public class TrackerCoreContext {
 
-    @Bean
+    @Bean       // сервис генерации данных GPS
     public GpsService gpsService() {
         return new GpsService();
     }
 
-    @Bean
+    @Bean       // сервис хранения собираемынх данных GPS
     public StoreService storeService() {
         return new StoreService();
     }
 
-    @Bean
+    @Bean       // настройка многопоточности
     public TaskScheduler poolScheduler() {
         ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();
         scheduler.setThreadNamePrefix("poolScheduler-");
