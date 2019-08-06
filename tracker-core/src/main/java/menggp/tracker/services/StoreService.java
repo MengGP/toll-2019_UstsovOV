@@ -17,8 +17,9 @@ import java.util.concurrent.LinkedBlockingDeque;
 
 /**
  *  Сервис хранения данных GPS (очередь)
- *      - "ставит" в очередь данные геерируемые GpsService
- *      - класс связан с классом GpsService с помощью аннотации @Autwoired
+ *      - кладет в очередь данные геерируемые GpsService
+ *      - отправляет данные из очереди с помощью SendService
+ *      - класс связан с классами GpsService и SendService с помощью аннотации @Autwoired
  */
 
 @Service
@@ -28,8 +29,8 @@ public class StoreService {
     //------------------------------------------------------------------------
     @Autowired
     private GpsService gpsService;
-    @Autowired
-    private SendService sendService;
+    //@Autowired
+    //private SendService sendService;
 
     // аттрибуты
     //------------------------------------------------------------------------
@@ -62,11 +63,23 @@ public class StoreService {
 
     } // end_method putToQueue
 
-
+    /*
     // извлекаем из очереди положенные ранее туда объекты - используем извлечение с блокировкой
     @Scheduled (fixedDelayString = "${takeQueueDelay.prop}", initialDelayString = "${storeInitialDelay.prop}")
     private void takeFromQueue() throws InterruptedException {
+        // отправка очередной строки данных из очереди с помошью метода класса SendService
         sendService.sendLocation( queue.take() );
+    } // end_method
+    */
+
+    // метод возврящает размер очереди
+    public int sizeOfQueue() throws InterruptedException {
+        return queue.size();
+    } // end_method
+
+    // метод реализующий извлечение объектов из очереди - извлечение с блокировкой
+    public String takeFromQueue() throws InterruptedException {
+        return queue.take();
     } // end_method
 
 
