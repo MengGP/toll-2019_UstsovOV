@@ -1,10 +1,11 @@
 package menggp.tracker.services;
 
-import org.springframework.beans.factory.annotation.Value;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
 import menggp.dto.*;
+
 
 /**
  *  Сервис эмулирующий работу GPS
@@ -13,6 +14,11 @@ import menggp.dto.*;
  */
 @Service
 public class GpsService {
+
+    // связанные классы
+    //------------------------------------------------------------------------
+    @Autowired
+    private StoreService storeService;
 
     // аттрибуты
     //------------------------------------------------------------------------
@@ -58,17 +64,19 @@ public class GpsService {
     // методы
     //------------------------------------------------------------------------
 
-    // @Scheduled(cron = "*/5 * * * * *")
-    // @Scheduled (fixedRateString = "${gpsDataDelay.prop}" )
-    public void genreateCoordinates() {
-        // rnd = (int)(Math.random()*6) +1;
+    // метод складывает GPS-данные из трека в очередь, предоставляемую сервисом StoreService
+    @Scheduled(fixedRateString = "${gpsDataDelay.prop}", initialDelayString = "${storeInitialDelay.prop}")
+    private void putCurrentGpsData() throws  Exception {
+        Location currentGpsData = new Location();
+        currentGpsData.setLat( (int)(Math.random()*91) +0 );
+        currentGpsData.setLon( (int)(Math.random()*91) +0 );
+        currentGpsData.setAzimuth( (int)(Math.random()*361) +0 );
+        currentGpsData.setInstantSpeed( (int)(Math.random()*91) +0 );
+        currentGpsData.setTime( System.currentTimeMillis() );
+        currentGpsData.setAutoId("o567gfd");
 
-        // генерация случайных координат, азимута и мгновенной скорости - упрощенных вариант
-        lat = (int)(Math.random()*91) +0;
-        lon = (int)(Math.random()*91) +0;
-        azimuth = (int)(Math.random()*361) +0;
-        instantSpeed = (int)(Math.random()*91) +0;
+        storeService.putToQueue( currentGpsData.toJson() );
 
-    }  // end_method genreateCoordinate()
+    } // end_method
 
 } // end_class
