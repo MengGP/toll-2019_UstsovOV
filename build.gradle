@@ -26,7 +26,10 @@ subprojects {
             
              // https://mvnrepository.com/artifact/ch.qos.logback/logback-classic
              compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.2'
-
+             
+             // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
+             compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
+             testCompile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
         }
     
 }
