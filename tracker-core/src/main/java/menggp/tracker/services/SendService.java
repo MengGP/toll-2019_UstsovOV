@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.annotation.PostConstruct;
+
 /**
  *  Класса - реализует отправку сообщений в лог
  *      - в нашем случеа отправлет, извлекаемую из очереди, строку формата JSON в лог
@@ -31,6 +33,4 @@ public class SendService {
         while ( storeService.sizeOfQueue() > 0 ) Log.info( storeService.takeFromQueue() );
     } // end_method
 
-
-
-} //end_class
+    } //end_class
