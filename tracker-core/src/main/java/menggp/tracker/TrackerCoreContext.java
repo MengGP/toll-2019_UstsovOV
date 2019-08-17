@@ -12,6 +12,9 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
+ *  Устаревший
+ *      - функию этого класса взял на себя menggp.tracker.springApp.Application
+ *
  *  Класс контекста
  *      описываем Bean-ы для сервисов и расписания
  */

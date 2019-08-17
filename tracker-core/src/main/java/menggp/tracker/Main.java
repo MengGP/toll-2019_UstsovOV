@@ -5,7 +5,12 @@ import menggp.dto.Point;
 import java.io.IOException;
 
 /**
+ *
+ *  Рудементарный класс
+ *      - от первйо итерации развития проекта
+ *
  * Created by jdev on 07.03.2017.
+ *
  */
 public class Main {
     public static void main(String... args) throws Exception {
