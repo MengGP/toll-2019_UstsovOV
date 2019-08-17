@@ -11,6 +11,7 @@
 <h1 th:inline="text">Вы авторизованы - [[${#httpServletRequest.remoteUser}]]!</h1>
 
 <p>Страница "routes" <a th:href="@{/routes}">здесь</a>.</p>
+<p>Страница "payments" <a th:href="@{/payments}">здесь</a>.</p>
 
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>

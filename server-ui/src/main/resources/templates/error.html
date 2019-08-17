@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Something Wrong!</title>
+</head>
+<body>
+<h1 th:inline="text">Что-то пошло не так...!</h1>
+<p> Проверьте, имеет ли пользователь доступ к странице</p>
+<p> Вернуться к "home" <a th:href="@{/home}">тык</a>.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+</body>
+</html>
