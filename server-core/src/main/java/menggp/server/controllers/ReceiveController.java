@@ -1,7 +1,7 @@
 package menggp.server.controllers;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -12,6 +12,10 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 public class ReceiveController {
+
+    // Константы
+    //------------------------------------------------------------------------
+    private static final Logger Log = LoggerFactory.getLogger(ReceiveController.class);
 
      /*
      * тест доступности контекста
@@ -24,7 +28,10 @@ public class ReceiveController {
     @RequestMapping(value="/location",method = RequestMethod.POST)
     @ResponseBody
     public String receiveLocation(@RequestBody String str) {
-        System.out.println(" --- OK --- ");
+
+        Log.info(str);
+
+        // возвращаем полученные в запросе данные
         return str;
     } // end_method
 

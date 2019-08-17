@@ -1,6 +1,5 @@
 package menggp.tracker.services;
 
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
@@ -27,6 +26,7 @@ public class SendService {
     // Константы
     //------------------------------------------------------------------------
     private static final String URL_SERVER_CORE = "http://localhost:8080/location";
+    private static final Logger Log = LoggerFactory.getLogger(SendService.class);
 
     // связанные классы
     //------------------------------------------------------------------------
@@ -38,7 +38,7 @@ public class SendService {
 
     // аттрибуты
     //------------------------------------------------------------------------
-    private static final Logger Log = LoggerFactory.getLogger(SendService.class);
+
 
     // методы
     //------------------------------------------------------------------------
