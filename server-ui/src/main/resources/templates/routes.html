@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Routes page</title>
+</head>
+<body>
+<h1 th:inline="text">Routes page</h1>
+<p> К данной странице имеет доступ: CLIENT, MANAGER, ROOT</p>
+<p> Вернуться к "home" <a th:href="@{/home}">тык</a>.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+</body>
+</html>
