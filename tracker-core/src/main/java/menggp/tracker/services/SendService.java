@@ -2,6 +2,7 @@ package menggp.tracker.services;
 
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class SendService {
 
     // Константы
     //------------------------------------------------------------------------
-    private static final String URL_SERVER_CORE = "http://localhost:8080";
+    private static final String URL_SERVER_CORE = "http://localhost:8080/location";
 
     // связанные классы
     //------------------------------------------------------------------------
@@ -56,14 +57,16 @@ public class SendService {
 
             try {
                 // POST запрос на сервер server-core с координатами из очереди
-                ResponseEntity<String> result = restTemplate.postForEntity(URL_SERVER_CORE, storeService.takeFromQueue(), String.class);
+
+                HttpEntity<String> requestBody = new HttpEntity<>(storeService.takeFromQueue());
+                ResponseEntity<String> result = restTemplate.postForEntity(URL_SERVER_CORE, requestBody, String.class);
                 // выводим в лог возвращенный код и данные объекта
-                Log.info("Status code:"+result.getStatusCode());
+                Log.info("Status code: "+result.getStatusCode());
                 Log.info(result.getBody());
             }
             catch (ResourceAccessException|HttpClientErrorException ex) {
                 Log.info(ex.getMessage());
-                storeService.takeFromQueue();   // извлечение из очереди
+                //storeService.takeFromQueue();   // извлечение из очереди
             }
 
         } // end_while
