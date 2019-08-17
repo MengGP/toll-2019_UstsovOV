@@ -1,7 +1,7 @@
 package menggp.server.controllers;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import menggp.server.services.WriteLocationService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -15,7 +15,11 @@ public class ReceiveController {
 
     // Константы
     //------------------------------------------------------------------------
-    private static final Logger Log = LoggerFactory.getLogger(ReceiveController.class);
+
+    // связанные классы
+    //------------------------------------------------------------------------
+    @Autowired
+    private WriteLocationService writeLocationService;
 
      /*
      * тест доступности контекста
@@ -29,7 +33,7 @@ public class ReceiveController {
     @ResponseBody
     public String receiveLocation(@RequestBody String str) {
 
-        Log.info(str);
+        writeLocationService.writeAll(str);
 
         // возвращаем полученные в запросе данные
         return str;

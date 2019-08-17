@@ -1,5 +1,6 @@
 package menggp.server.springApp;
 
+import menggp.server.services.WriteLocationService;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.web.client.RestTemplateBuilder;
@@ -14,5 +15,10 @@ public class Application {
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
     } // end_main
+
+    @Bean   // сервис записи GPS данных
+    public WriteLocationService writeLocationService() {
+        return new WriteLocationService();
+    } //end_bean
 
 } // end_class
