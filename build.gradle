@@ -75,6 +75,14 @@ project(':server-ui'){
     dependencies {
         compile project(':common')
         testCompile project(':common')
+        // tag::security[]
+        compile("org.springframework.boot:spring-boot-starter-security")
+        // end::security[]
+    }
+    
+    jar {
+       baseName = 'security-boot'
+       version =  '0.1.0'
     }
 }
 
