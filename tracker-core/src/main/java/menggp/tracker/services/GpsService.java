@@ -37,7 +37,6 @@ public class GpsService {
     private int azimuth;
     private int instantSpeed;
 
-    // private ArrayList<String> skill = new ArrayList<>();
     private ArrayList<Location> trackPoints = new ArrayList<>();
     private int trackPointIterator = 0;
 

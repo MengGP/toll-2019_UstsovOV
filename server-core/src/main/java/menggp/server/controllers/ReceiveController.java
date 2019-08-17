@@ -2,6 +2,7 @@ package menggp.server.controllers;
 
 import menggp.server.services.WriteLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 /**
@@ -28,6 +29,9 @@ public class ReceiveController {
         System.out.println(" --- context available --- ");
         return "It's os good";
     }*/
+
+    // Методы
+    //------------------------------------------------------------------------
 
     @RequestMapping(value="/location",method = RequestMethod.POST)
     @ResponseBody

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.client.HttpClientErrorException;
+import org.springframework.web.client.HttpServerErrorException;
 import org.springframework.web.client.ResourceAccessException;
 import org.springframework.web.client.RestTemplate;
 
@@ -64,7 +65,7 @@ public class SendService {
                 Log.info("Status code: "+result.getStatusCode());
                 Log.info(result.getBody());
             }
-            catch (ResourceAccessException|HttpClientErrorException ex) {
+            catch (ResourceAccessException|HttpClientErrorException| HttpServerErrorException ex) {
                 Log.info(ex.getMessage());
                 //storeService.takeFromQueue();   // извлечение из очереди
             }
