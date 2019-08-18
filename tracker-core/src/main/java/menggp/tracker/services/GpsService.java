@@ -11,7 +11,6 @@ import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.io.File;
@@ -32,11 +31,6 @@ public class GpsService {
 
     // аттрибуты
     //------------------------------------------------------------------------
-    private int lat;
-    private int lon;
-    private int azimuth;
-    private int instantSpeed;
-
     private ArrayList<Location> trackPoints = new ArrayList<>();
     private int trackPointIterator = 0;
 
@@ -45,41 +39,9 @@ public class GpsService {
 
     // сеттеры и геттеры
     //------------------------------------------------------------------------
-    public int getLat() {
-        return lat;
-    }
-
-    public void setLat(int lat) {
-        this.lat = lat;
-    }
-
-    public int getLon() {
-        return lon;
-    }
-
-    public void setLon(int lon) {
-        this.lon = lon;
-    }
-
-    public int getAzimuth() {
-        return azimuth;
-    }
-
-    public void setAzimuth(int azimuth) {
-        this.azimuth = azimuth;
-    }
-
-    public int getInstantSpeed() {
-        return instantSpeed;
-    }
-
-    public void setInstantSpeed(int instantSpeed) {
-        this.instantSpeed = instantSpeed;
-    }
 
     // методы
     //------------------------------------------------------------------------
-
 
     // метод пасит файл с GPS треком формата KML
     @PostConstruct
