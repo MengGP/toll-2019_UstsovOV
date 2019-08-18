@@ -17,7 +17,7 @@ subprojects {
     dependencies{
             // https://mvnrepository.com/artifact/org.springframework/spring-core
             compile group: 'org.springframework', name: 'spring-context', version: '4.3.7.RELEASE'
-            
+
             compile("org.springframework.boot:spring-boot-starter-thymeleaf")
             compile("org.springframework.boot:spring-boot-devtools")
             testCompile("org.springframework.boot:spring-boot-starter-test")
@@ -35,9 +35,9 @@ subprojects {
              // https://mvnrepository.com/artifact/de.micromata.jak/JavaAPIforKml
              compile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
              testCompile group: 'de.micromata.jak', name: 'JavaAPIforKml', version: '2.2.0'
-             
+
         }
-        
+
     jar {
         baseName = 'gessing-boot'
         version =  '0.1.0'
@@ -52,10 +52,6 @@ project(':common'){
     dependencies{
         compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.8.7'
     }
-
-    task fatJar(type: OneJar) {
-        mainClass = 'menggp.server.Main'
-    }
 }
 
 // --- субпроект "server-core"
@@ -66,7 +62,7 @@ project(':server-core'){
     }
 
     task fatJar(type: OneJar) {
-        mainClass = 'menggp.server.Main'
+        mainClass = 'menggp.server.springApp.Application'
     }
 }
 
@@ -79,7 +75,7 @@ project(':server-ui'){
         compile("org.springframework.boot:spring-boot-starter-security")
         // end::security[]
     }
-    
+
     jar {
        baseName = 'security-boot'
        version =  '0.1.0'
@@ -94,7 +90,7 @@ project(':tracker-core'){
     }
 
    task fatJar(type: OneJar) {
-           mainClass = 'menggp.tracker.Main'
+           mainClass = 'menggp.tracker.springApp.Application'
        }
 }
 
