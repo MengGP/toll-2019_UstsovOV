@@ -42,6 +42,10 @@ public class Location {
         return point.toJson();
     }
 
+    public String toString() {
+        return  point.toString();
+    }
+
     public void setTime(long time) {
         point.setTime(time);
     }
