@@ -8,7 +8,7 @@
             CREATE TABLE LOCATIONS
             (
             ID integer AUTO_INCREMENT PRIMARY KEY,
-            LOCATIONSTRING varchar(32)
+            LOCATIONSTRING varchar(128)
             )
 
         </sql>

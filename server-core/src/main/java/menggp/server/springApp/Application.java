@@ -1,5 +1,6 @@
 package menggp.server.springApp;
 
+import menggp.server.dao.CrudMethods;
 import menggp.server.dao.LocationEntity;
 import menggp.server.dao.repo.LocationsRepository;
 import menggp.server.services.WriteLocationService;
@@ -18,13 +19,13 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 @SpringBootApplication
-@ComponentScan({"menggp.server.springApp","menggp.server.services","menggp.server.controllers"})
+@ComponentScan({"menggp.server.springApp","menggp.server.services","menggp.server.controllers","menggp.server.dao"})
 @EnableJpaRepositories("menggp.server.dao")                                     // for DB
 @EntityScan(basePackageClasses =  LocationEntity.class)       // for DB
 public class Application implements CommandLineRunner  {
 
     private static final Logger log = LoggerFactory.getLogger(Application.class);
-    private List<LocationEntity> all;
+//    private List<LocationEntity> all;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -41,46 +42,54 @@ public class Application implements CommandLineRunner  {
         return new PropertySourcesPlaceholderConfigurer();
     }
 
+    @Bean
+    public CrudMethods crudMethods () {
+        return new CrudMethods();
+    } // end_bean
+
     @Autowired
     LocationsRepository locationsRepository;
 
+    @Autowired
+    CrudMethods crudMethods;
 
     @Override
     public void run(String... args) throws Exception{
-        read();
+        crudMethods.read();
 
-        LocationEntity loc1 = create("location string #1");
-        LocationEntity loc2 = create("location string #2");
-        LocationEntity loc3 = create("location string #3");
+        LocationEntity loc1 = crudMethods.create("location string #1"); //create("location string #1");
+        LocationEntity loc2 = crudMethods.create("location string #2");
+        LocationEntity loc3 = crudMethods.create("location string #3");
         log.info("=========== after create");
-        read();
+        crudMethods.read();
 
-        update(loc1, "Location #1 - test pass");
-        update(loc2, "Location #2 - test pass");
-        update(loc3, "Location #3 - test pass");
+
+        crudMethods.update(loc1, "Location #1 - test pass");
+        crudMethods.update(loc2, "Location #2 - test pass");
+        crudMethods.update(loc3, "Location #3 - test pass");
         log.info("=========== after update");
-        read();
+        crudMethods.read();
 
-        delete(loc1);
+        crudMethods.delete(loc1);
         log.info("=========== after delete 1");
-        read();
+        crudMethods.read();
 
-        delete(loc2);
+        crudMethods.delete(loc2);
         log.info("=========== after delete 2");
-        read();
+        crudMethods.read();
 
-        delete(loc3);
+        crudMethods.delete(loc3);
         log.info("=========== after delete 3");
-        read();
+        crudMethods.read();
 
     } // end_method
 
+    /*
     private LocationEntity create(String locationString) {
         LocationEntity locationEntity = new LocationEntity();
         locationEntity.setLocationString(locationString);
         return  locationsRepository.save(locationEntity);
     } // end_method
-
 
     private void read() {
         all = (List<LocationEntity>) locationsRepository.findAll();
@@ -92,7 +101,6 @@ public class Application implements CommandLineRunner  {
         }
     } // end_method
 
-
     private void update(LocationEntity locationEntity, String locationString) {
         locationEntity.setLocationString(locationString);
         locationsRepository.save(locationEntity);
@@ -101,6 +109,7 @@ public class Application implements CommandLineRunner  {
     private void delete(LocationEntity locationEntity) {
         locationsRepository.delete(locationEntity);
     } // end_method
+     */
 
 
 } // end_class
