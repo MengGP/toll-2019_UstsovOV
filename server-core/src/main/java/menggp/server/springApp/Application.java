@@ -11,10 +11,13 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Profile;
+import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.List;
 
@@ -76,6 +79,7 @@ public class Application implements CommandLineRunner  {
         crudMethods.delete(loc1);
         log.info("=========== after delete 1");
         crudMethods.read();
+
 
         crudMethods.delete(loc2);
         log.info("=========== after delete 2");

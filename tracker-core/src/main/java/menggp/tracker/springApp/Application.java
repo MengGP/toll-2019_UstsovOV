@@ -26,7 +26,7 @@ import org.springframework.web.context.WebApplicationContext;
  */
 
 @SpringBootApplication
-@ComponentScan( {"menggp.server.springApp","menggp.server.sevices","menggp.server.controllers"} )
+@ComponentScan( {"menggp.tracker.springApp","menggp.tracker.services","menggp.tracker.controllers"} )
 @Configuration
 @EnableScheduling
 @PropertySource("classpath:/app.properties")
