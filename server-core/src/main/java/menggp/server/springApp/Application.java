@@ -55,6 +55,10 @@ public class Application implements CommandLineRunner  {
 
     @Override
     public void run(String... args) throws Exception{
+
+        crudMethods.flushTable();
+
+        /*
         crudMethods.read();
 
         LocationEntity loc1 = crudMethods.create("location string #1"); //create("location string #1");
@@ -62,7 +66,6 @@ public class Application implements CommandLineRunner  {
         LocationEntity loc3 = crudMethods.create("location string #3");
         log.info("=========== after create");
         crudMethods.read();
-
 
         crudMethods.update(loc1, "Location #1 - test pass");
         crudMethods.update(loc2, "Location #2 - test pass");
@@ -81,6 +84,7 @@ public class Application implements CommandLineRunner  {
         crudMethods.delete(loc3);
         log.info("=========== after delete 3");
         crudMethods.read();
+         */
 
     } // end_method
 

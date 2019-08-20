@@ -50,6 +50,17 @@ public class CrudMethods {
         locationsRepository.delete(locationEntity);
     } // end_method
 
+    public void flushTable() {
+        all = (List<LocationEntity>) locationsRepository.findAll();
+        if (all.size() == 0) {
+            log.info("NO RECORDS");
+        }
+        else {
+            all.stream().forEach(locationEntity -> delete(locationEntity) );// log.info(locationEntity.toString()));
+        }
+    } // end_method
+
+
 } // end_class
 
 
