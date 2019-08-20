@@ -59,6 +59,16 @@ project(':server-core'){
     dependencies {
         compile project(':common')
         testCompile project(':common')
+
+        // для работы с БД
+        //compile("org.springframework.boot:spring-boot-starter-web")
+        //        {
+        //            exclude module: "spring-boot-starter-tomcat"
+        //        }
+        compile("org.springframework.boot:spring-boot-starter-data-jpa")
+        compile group: 'org.liquibase', name: 'liquibase-core', version: '3.5.3'
+        compile group: 'com.h2database', name: 'h2', version: '1.4.195'
+        
     }
 
     task fatJar(type: OneJar) {

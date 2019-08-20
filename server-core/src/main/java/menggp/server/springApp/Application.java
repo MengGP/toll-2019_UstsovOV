@@ -1,18 +1,30 @@
 package menggp.server.springApp;
 
+import menggp.server.dao.LocationEntity;
+import menggp.server.dao.repo.LocationsRepository;
 import menggp.server.services.WriteLocationService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.web.client.RestTemplateBuilder;
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.web.client.RestTemplate;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.util.List;
 
 @SpringBootApplication
 @ComponentScan({"menggp.server.springApp","menggp.server.services","menggp.server.controllers"})
-public class Application {
+@EnableJpaRepositories("menggp.server.dao")                                     // for DB
+@EntityScan(basePackageClasses =  LocationEntity.class)       // for DB
+public class Application implements CommandLineRunner  {
+
+    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private List<LocationEntity> all;
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
@@ -22,5 +34,73 @@ public class Application {
     public WriteLocationService writeLocationService() {
         return new WriteLocationService();
     } //end_bean
+
+    // подключение application.properties для работы с DB
+    @Bean
+    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
+        return new PropertySourcesPlaceholderConfigurer();
+    }
+
+    @Autowired
+    LocationsRepository locationsRepository;
+
+
+    @Override
+    public void run(String... args) throws Exception{
+        read();
+
+        LocationEntity loc1 = create("location string #1");
+        LocationEntity loc2 = create("location string #2");
+        LocationEntity loc3 = create("location string #3");
+        log.info("=========== after create");
+        read();
+
+        update(loc1, "Location #1 - test pass");
+        update(loc2, "Location #2 - test pass");
+        update(loc3, "Location #3 - test pass");
+        log.info("=========== after update");
+        read();
+
+        delete(loc1);
+        log.info("=========== after delete 1");
+        read();
+
+        delete(loc2);
+        log.info("=========== after delete 2");
+        read();
+
+        delete(loc3);
+        log.info("=========== after delete 3");
+        read();
+
+    } // end_method
+
+    private LocationEntity create(String locationString) {
+        LocationEntity locationEntity = new LocationEntity();
+        locationEntity.setLocationString(locationString);
+        return  locationsRepository.save(locationEntity);
+    } // end_method
+
+
+    private void read() {
+        all = (List<LocationEntity>) locationsRepository.findAll();
+
+        if (all.size() == 0) {
+            log.info("NO RECORDS");
+        } else {
+            all.stream().forEach(locationEntity -> log.info(locationEntity.toString()));
+        }
+    } // end_method
+
+
+    private void update(LocationEntity locationEntity, String locationString) {
+        locationEntity.setLocationString(locationString);
+        locationsRepository.save(locationEntity);
+    } // end_method
+
+    private void delete(LocationEntity locationEntity) {
+        locationsRepository.delete(locationEntity);
+    } // end_method
+
 
 } // end_class
