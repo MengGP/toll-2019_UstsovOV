@@ -4,6 +4,7 @@ import menggp.dto.Location;
 import de.micromata.opengis.kml.v_2_2_0.*;
 
 
+import menggp.tracker.dao.CrudMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -29,6 +30,9 @@ public class GpsService {
     @Autowired
     private StoreService storeService;
 
+    @Autowired
+    private CrudMethods crudMethods;
+
     // аттрибуты
     //------------------------------------------------------------------------
     private ArrayList<Location> trackPoints = new ArrayList<>();
@@ -51,6 +55,9 @@ public class GpsService {
         final Document document = (Document) kml.getFeature();
 
         List<Feature> placemarks = document.getFeature();
+
+        // очистка таблицы при старте приложения
+        crudMethods.flushTable();
 
         // цикл по массиву треков в KML-файле
         for (Object sectionOfTrack : placemarks ) {
@@ -95,12 +102,24 @@ public class GpsService {
 
                 } // end_if
 
+                // добавляем объект в очередь - для дальнейшего извлечения по расписанию
                 trackPoints.add(currentGpsData);
+
+                // пишем данные базу данных
+                crudMethods.create(
+                        currentGpsData.getLat(),
+                        currentGpsData.getLon(),
+                        currentGpsData.getAzimuth(),
+                        currentGpsData.getInstantSpeed(),
+                        currentGpsData.getTime(),
+                        currentGpsData.getAutoId()
+                );
 
             } // end_for
 
         } // end_for
 
+        crudMethods.read();
 
     } // end_method
 

@@ -47,7 +47,7 @@ public class ReceiveController {
     public String receiveLocation(@RequestBody String str) {
 
         writeLocationService.writeAll(str);
-        LocationEntity newLocation = crudMethods.create(str);
+        crudMethods.create(str);
 
         // возвращаем полученные в запросе данные
         return str;

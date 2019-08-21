@@ -19,7 +19,7 @@ import java.util.List;
  */
 public class CrudMethods {
 
-    private static final Logger log = LoggerFactory.getLogger(Application.class);
+    private static final Logger log = LoggerFactory.getLogger(CrudMethods.class);
     private List<LocationEntity> all;
 
     @Autowired

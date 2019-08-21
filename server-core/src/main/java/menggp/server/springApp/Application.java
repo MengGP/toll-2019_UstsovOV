@@ -23,7 +23,7 @@ import java.util.List;
 
 @SpringBootApplication
 @ComponentScan({"menggp.server.springApp","menggp.server.services","menggp.server.controllers","menggp.server.dao"})
-@EnableJpaRepositories("menggp.server.dao")                                     // for DB
+@EnableJpaRepositories("menggp.server.dao")                   // for DB
 @EntityScan(basePackageClasses =  LocationEntity.class)       // for DB
 public class Application implements CommandLineRunner  {
 
@@ -50,8 +50,8 @@ public class Application implements CommandLineRunner  {
         return new CrudMethods();
     } // end_bean
 
-    @Autowired
-    LocationsRepository locationsRepository;
+//    @Autowired
+//    LocationsRepository locationsRepository;
 
     @Autowired
     CrudMethods crudMethods;
