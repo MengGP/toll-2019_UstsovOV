@@ -18,11 +18,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/","/home").authenticated()
                     .antMatchers("/error").authenticated()
                     .antMatchers("/css","/img").permitAll()
-                    .antMatchers("/routes","/routes/**").hasRole("CLIENT")
-                    .antMatchers("/payments","payments/**").hasRole("CLIENT")
-                    .antMatchers("/registerClient","/registerClient/**").hasRole("MANAGER")
+                    .antMatchers("/routes","/routes/**").hasAnyRole("CLIENT","MANAGER","ROOT")
+                    .antMatchers("/payments","payments/**").hasAnyRole("CLIENT","MANAGER","ROOT")
+                    .antMatchers("/registerClient","/registerClient/**").hasAnyRole("MANAGER","ROOT")
                     .antMatchers("/registerManager","/registerManager/**").hasRole("ROOT")
-                    .anyRequest().hasRole("CLIENT")
+                    .anyRequest().authenticated()
                     .and()
                 .formLogin()
                     .loginPage("/login")
@@ -38,9 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .inMemoryAuthentication()
                     .withUser("client").password("client").roles("CLIENT")
                     .and()
-                    .withUser("manager").password("manager").roles("CLIENT", "MANAGER")
+                    .withUser("manager").password("manager").roles("MANAGER")
                     .and()
-                    .withUser("root").password("root").roles("CLIENT", "MANAGER","ROOT");
+                    .withUser("root").password("root").roles("ROOT");
+
 
     } // end_method
 

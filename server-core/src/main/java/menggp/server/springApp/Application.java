@@ -1,6 +1,7 @@
 package menggp.server.springApp;
 
 import menggp.server.dao.CrudMethods;
+import menggp.server.dao.CrudUserMethods;
 import menggp.server.dao.LocationEntity;
 import menggp.server.dao.repo.LocationsRepository;
 import menggp.server.services.WriteLocationService;
@@ -50,16 +51,28 @@ public class Application implements CommandLineRunner  {
         return new CrudMethods();
     } // end_bean
 
+    @Bean
+    public CrudUserMethods crudUserMethods() {
+        return new CrudUserMethods();
+    } // end_bean
+
 //    @Autowired
 //    LocationsRepository locationsRepository;
 
     @Autowired
     CrudMethods crudMethods;
 
+    @Autowired
+    CrudUserMethods crudUserMethods;
+
     @Override
     public void run(String... args) throws Exception{
 
         crudMethods.flushTable();
+
+        crudUserMethods.create("admin", "admin", "ROOT");
+
+        crudUserMethods().read();
 
         /*
         crudMethods.read();

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import java.util.List;
 
 /**
- *  Метод реализует CRUD операции для работы с DB в проекте server-core
+ *  Метод реализует CRUD операции для работы с таблицей LOCATION в проекте server-core
  *      Create
  *       Read
  *        Update
