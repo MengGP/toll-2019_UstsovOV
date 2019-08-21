@@ -45,12 +45,9 @@ public class Application implements CommandLineRunner {
     public static void main(String[] args) {
         // запускаем в виде SpringBootApplication - но без поднятия web-cервера - т.к. для реализации функционала он не нужен
         // - т.к. для реализации функционала он не нужен и бужет мешать web-серверу проекта server-core
-
         new SpringApplicationBuilder(Application.class)
-                .web(false) // но это не точно
+                .web(false)
                 .run(args);
-
-
         // обычный запуск
         //SpringApplication.run(Application.class, args);
     } // end_main
