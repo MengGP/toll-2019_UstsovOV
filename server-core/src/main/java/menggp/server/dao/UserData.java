@@ -22,8 +22,11 @@ public class UserData {
     @Column(name = "ROLE")
     String role;
 
+    @Column(name = "ENABLED")
+    boolean enabled;
+
     public String toString() {
-        return "{ User = "+name+", pass = "+password+", role = "+role+" }";
+        return "{ User = "+name+", pass = "+password+", role = "+role+", enabled = "+enabled+" }";
     } // end_method
 
     public int getId() {
@@ -58,8 +61,11 @@ public class UserData {
         this.role = role;
     }
 
+    public boolean isEnabled() {
+        return enabled;
+    }
 
-
-
-
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
 } // end_class

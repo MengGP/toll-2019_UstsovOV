@@ -22,12 +22,13 @@ public class CrudUserMethods {
     @Autowired
     UserDataRepository userDataRepository;
 
-    public UserData create(String name, String password, String role) {
+    public UserData create(String name, String password, String role, boolean enabled) {
         UserData userData = new UserData();
         
         userData.setName(name);
         userData.setPassword(password);
         userData.setRole(role);
+        userData.setEnabled(enabled);
  
         return  userDataRepository.save(userData);
     } // end_method
@@ -42,10 +43,11 @@ public class CrudUserMethods {
         }
     } // end_method
 
-    public void update(UserData userData, String name, String password, String role) {
+    public void update(UserData userData, String name, String password, String role, boolean enabled) {
         userData.setName(name);
         userData.setPassword(password);
         userData.setRole(role);
+        userData.setEnabled(enabled);
 
         userDataRepository.save(userData);
     } // end_method
