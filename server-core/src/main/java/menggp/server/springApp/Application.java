@@ -70,11 +70,11 @@ public class Application implements CommandLineRunner  {
 
         crudMethods.flushTable();
 
-        /*
-        crudUserMethods.flushTable();
-        crudUserMethods.create("admin", "admin", "ROLE_ROOT",true);
-        crudUserMethods().read();
-        */
+
+//        crudUserMethods.flushTable();
+//        crudUserMethods.create("test", "test", "ROLE_CLIENT",true);
+//        crudUserMethods().read();
+
 
         /*
         crudMethods.read();

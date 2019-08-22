@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>User DB page</title>
+</head>
+
+<body>
+<h1 th:inline="text">Data page - user DB</h1>
+<p>--------------------------------------------------------</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PASSWORD</th>
+        <th>ROLE</th>
+    </tr>
+    <tr th:each="iterator : ${userDB}">
+        <td th:text="${iterator.getId()}"></td>
+        <td th:text="${iterator.getName()}"></td>
+        <td th:text="${iterator.getPassword()}"></td>
+        <td th:text="${iterator.getRole()}"></td>
+    </tr>
+</table>
+
+
+<!--
+<table>
+    <tr>
+        <th>NUM</th>
+    </tr>
+    <tr th:each="iterator : ${intArray}">
+        <td th:text="${iterator}"></td>
+    </tr>
+</table>
+-->
+
+
+<p> Вернуться к "home" <a th:href="@{/home}">тык</a>.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

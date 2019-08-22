@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
  *
  */
 @RestController
-public class RecievePointsRequest {
+public class ReceivePointsRequest {
 
     @Autowired
     private CrudMethods crudMethods;

@@ -1,10 +1,13 @@
 package menggp.server.dao;
 
+import menggp.dto.UserDBEntry;
+import menggp.dto.UserDBList;
 import menggp.server.dao.repo.UserDataRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
 /**
@@ -64,6 +67,31 @@ public class CrudUserMethods {
         else {
             all.stream().forEach(userData -> delete(userData) );// log.info(userData.toString()));
         }
+    } // end_method
+    
+    public UserDBList readUserDBList() {
+        UserDBList userDBList = new UserDBList();
+        List<UserDBEntry> userDB = new UserDBList().getUserDBList();
+
+
+        all = (List<UserData>) userDataRepository.findAll();
+
+//        for (int i=0; i<all.size(); i++) {
+//            userDB.add()
+//        }
+
+        for (UserData iterator : all ) {
+           UserDBEntry userDBEntry = new UserDBEntry();
+           userDBEntry.setId( iterator.getId() );
+           userDBEntry.setName( iterator.getName() );
+           userDBEntry.setPassword( iterator.getPassword() );
+           userDBEntry.setRole( iterator.getRole() );
+           userDB.add( userDBEntry );
+        }
+
+        userDBList.setUserDBList(userDB);
+
+        return userDBList;
     } // end_method
 
 } // end_method
