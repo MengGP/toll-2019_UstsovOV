@@ -18,8 +18,9 @@ import java.io.IOException;
 import java.net.ConnectException;
 
 /**
- *  Класса - реализует отправку сообщений в лог
+ *  Класса - реализует отправку сообщений в лог и на сервер
  *      - в нашем случеа отправлет, извлекаемую из очереди, строку формата JSON в лог
+ *      - и на сервер в виде POST-запроса
  */
 @Service
 public class SendService {

@@ -5,6 +5,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
@@ -12,6 +13,7 @@ import org.springframework.core.env.Environment;
 
 
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.web.client.RestTemplate;
 
 import java.util.HashMap;
 
@@ -31,8 +33,13 @@ public class Application {
         driverManagerDataSource.setUsername( env.getProperty("spring.datasource.username") );
         driverManagerDataSource.setPassword( env.getProperty("spring.datasource.password") );
         return driverManagerDataSource;
-    }
+    } // end_bean
 
+    // подключаем RestTemplate
+    @Bean       // подключение RestTemplate
+    public RestTemplate restTemplate(RestTemplateBuilder builder) {
+        return builder.build();
+    } // end_bean
 
     // точка входа в приложение
     public static void main(String[] args) throws Throwable {
