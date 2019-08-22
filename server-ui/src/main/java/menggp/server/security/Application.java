@@ -16,7 +16,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import java.util.HashMap;
 
 @SpringBootApplication
-@ComponentScan("menggp.server.config")
+@ComponentScan({"menggp.server.config","menggp.server.controllers"})
 @PropertySource("classpath:db.properties")
 public class Application {
 

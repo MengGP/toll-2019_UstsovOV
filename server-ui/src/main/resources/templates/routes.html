@@ -7,6 +7,29 @@
 <body>
 <h1 th:inline="text">Routes page</h1>
 <p> К данной странице имеет доступ: CLIENT, MANAGER, ROOT</p>
+
+<!--
+<p>Введите количество записей которые вы хотите получить
+    <input type="number" min="0" step="1" name="pointsNum"/>
+    <a th:href="@{/requestPoints}">
+        <button> Получить </button>
+    </a>
+
+</p>
+-->
+<p>Введите количество записей которые вы хотите получить
+
+    <form th:action="@{/requestPoints}">
+        <input type="number" min="1" max="2147483647" step="1" name="pointsNum"/>
+        <button> Получить </button>
+
+    </form>
+
+</p>
+
+
+
+
 <p> Вернуться к "home" <a th:href="@{/home}">тык</a>.</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>
