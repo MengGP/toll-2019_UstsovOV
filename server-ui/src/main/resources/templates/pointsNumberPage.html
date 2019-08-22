@@ -7,10 +7,12 @@
 <body>
 <h1 th:inline="text">Data page - points list</h1>
 
-<p th:text="'Вы ввели: ' + ${result} + ' - это число.' " />
+<p th:text="'Вы ввели: ' + ${numOfPoins} + ' - это число.' " />
+<p>--------------------------------------------------------</p>
+<p th:text="${result}" />
 
 
-
+<p>--------------------------------------------------------</p>
 <p> Вернуться к "routes" <a th:href="@{/routes}">тык</a>.</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>

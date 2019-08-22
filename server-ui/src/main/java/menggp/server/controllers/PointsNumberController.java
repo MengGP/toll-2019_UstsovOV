@@ -29,13 +29,14 @@ public class PointsNumberController {
 
         int num;
         num = Integer.parseInt(pointsNum);
-        String result;
+        String numOfPoints;
+        String result="";
 
         // проверка на пустое поле - если 0 - это значит значение по умолчанию, т.е. не было введено ничего
-        if ( num == 0 ) result = "ничего, введите то что ";
+        if ( num == 0 ) numOfPoints = "ничего, введите то что ";
         else {
 
-            result = ""+num;
+            numOfPoints = ""+num;
 
             // POST-запрос на сервер server-ui
             try {
@@ -44,6 +45,7 @@ public class PointsNumberController {
                 // выводим в лог возвращенный код и дннные
                 Log.info("Status code: "+responseResult.getStatusCode());
                 Log.info( responseResult.getBody() ) ;
+                result = responseResult.getBody();
             }
             catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
                 Log.info(ex.getMessage());
@@ -51,10 +53,7 @@ public class PointsNumberController {
 
         } // end_if_else
 
-
-
-
-
+        model.addAttribute("numOfPoins",numOfPoints);
         model.addAttribute("result",result);
 
         return "pointsNumberPage";

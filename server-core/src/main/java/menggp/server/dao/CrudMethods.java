@@ -60,6 +60,35 @@ public class CrudMethods {
         }
     } // end_method
 
+    public String readWithReturn(int num) {
+        String result="";
+
+        all = (List<LocationEntity>) locationsRepository.findAll();
+
+        /*
+        // вернуть все записи таблицы
+        for ( LocationEntity iterator : all ) {
+            result = result + iterator.getLocationString();
+        }
+        */
+
+        // возвращаем строку с N последними записями из таблицы, в обратном порядке, от младшей (нижней) к старшей
+        int max = all.size() - 1;
+        int min = all.size() - num - 1;
+
+        for( int i=max; i>min ; i--) {
+            result = result + all.get(i).getLocationString();
+        }
+
+        return result;
+    } // end_method
+
+    public int tableSize() {
+        all = (List<LocationEntity>) locationsRepository.findAll();
+        return all.size();
+    } // end_method
+
+
 
 } // end_class
 
