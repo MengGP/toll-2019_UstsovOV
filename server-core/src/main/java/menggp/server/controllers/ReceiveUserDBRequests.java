@@ -36,6 +36,13 @@ public class ReceiveUserDBRequests {
         return resultStatus;
     } // end_method
 
+    @RequestMapping(value = "/deleteUserRequest", method = RequestMethod.POST)
+    @ResponseBody
+    public String DeleteUser(@RequestBody String deleteUserID){
+        crudUserMethods.deleteWithID( Integer.parseInt(deleteUserID) );
+        return "OK";
+    } // end_method
+
 
 
 } // end_class

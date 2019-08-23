@@ -24,6 +24,7 @@ public class UserDBController {
     private static final Logger Log = LoggerFactory.getLogger(UserDBController.class);
     private static final String URL_SERVER_CORE_USERDB_REQUEST = "http://localhost:8080/userDBRequest";
     private static final String URL_SERVER_CORE_CREATE_USER_REQUEST = "http://localhost:8080/createUserRequest";
+    private static final String URL_SERVER_CORE_DELETE_USER_REQUEST = "http://localhost:8080/deleteUserRequest";
 
     @Autowired
     RestTemplate restTemplate;
@@ -35,35 +36,28 @@ public class UserDBController {
      * @param model
      * @return
      */
-    @RequestMapping("/requestUserDB")
-    public  String requestUserDB(Model model) {
+    @RequestMapping("/userDBPage")
+    public String requestUserDB(Model model) {
 
         List<UserDBEntry> userDB = new UserDBList().getUserDBList();
 
         // запрос к БД - получить лист с пользователями
-
         try {
             HttpEntity<String> requestBody = new HttpEntity<>("readUserDB");
             ResponseEntity<UserDBList> responseResult =
                     restTemplate.postForEntity(URL_SERVER_CORE_USERDB_REQUEST, requestBody, UserDBList.class );
             Log.info("Status code: "+responseResult.getStatusCode());
-            Log.info( responseResult.getBody().toString() ) ;
-            Log.info( responseResult.getBody().getUserDBList().get(0).getName() );
-            Log.info( responseResult.getBody().getUserDBList().get(1).getName() );
+//            Log.info( responseResult.getBody().toString() ) ;
+//            Log.info( responseResult.getBody().getUserDBList().get(0).getName() );
+//            Log.info( responseResult.getBody().getUserDBList().get(1).getName() );
 
             userDB = responseResult.getBody().getUserDBList();
-
         }
         catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
             Log.info( ex.getMessage() );
-        }
+        } // end_try_catch
 
         model.addAttribute("userDB",userDB);
-
-//        int[] intArray = {1,2,3,4,5};
-//        model.addAttribute("intArray",intArray);
-
-
         return "userDBPage";
     } // end_method
 
@@ -133,20 +127,39 @@ public class UserDBController {
                 result = 1;
                 if ( responseResult.getBody().equals("OK")) {
                     result = 1;
-                    resultUser = " USER: "+name+" "+password+" "+role;
+                    resultUser = " login:"+name+", password:"+password+", role:"+role;
                 } // end_if
             }
             catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
                 Log.info( ex.getMessage() );
             } // end_try_catch
-
-
-        }
+        } // end_if
 
         model.addAttribute("resultUser",resultUser);
         model.addAttribute("result",result);
         return "createUserPage";
     } // end_class
+
+    @RequestMapping("/deleteUserRequest")
+    public String requestDeleteUser(@RequestParam(value = "selectUserID") String selectUserID, Model model) {
+        String str = " --- User ID = "+selectUserID;
+        Log.info(str);
+
+        // запрос на удаление пользователя
+        try {
+            HttpEntity<String> requestBody = new HttpEntity<>(selectUserID);
+            ResponseEntity<String> responseResult =
+                    restTemplate.postForEntity(URL_SERVER_CORE_DELETE_USER_REQUEST, requestBody, String.class );
+            Log.info("Status code: "+responseResult.getStatusCode());
+            Log.info( responseResult.getBody() ) ;
+        }
+        catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+            Log.info( ex.getMessage() );
+        } // end_try_catch
+
+        requestUserDB(model);
+        return "userDBPage";
+    } // end_method
 
 
 } // end_class

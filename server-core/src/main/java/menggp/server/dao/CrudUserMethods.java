@@ -94,4 +94,16 @@ public class CrudUserMethods {
         return userDBList;
     } // end_method
 
+    public void deleteWithID(int deleteUserID) {
+        all = (List<UserData>) userDataRepository.findAll();
+        for (UserData iterator : all) {
+            if ( iterator.getId() == deleteUserID ) {
+                userDataRepository.delete(iterator);
+                break;
+            }
+        } // end_for_each
+    } // end_method
+
+
+
 } // end_method
