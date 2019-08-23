@@ -104,6 +104,18 @@ public class CrudUserMethods {
         } // end_for_each
     } // end_method
 
+    public void updateUserWithID(UserDBEntry updUser) {
+        all = (List<UserData>) userDataRepository.findAll();
+        for (UserData iterator : all) {
+            if ( iterator.getId() == updUser.getId() ) {
+                iterator.setName( updUser.getName() );
+                iterator.setPassword( updUser.getPassword() );
+                iterator.setRole( updUser.getRole() );
+                userDataRepository.save(iterator);
+                break;
+            } // end_if
+        } // end_for_each
+    } // end_method
 
 
 } // end_method

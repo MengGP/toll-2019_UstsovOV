@@ -25,6 +25,7 @@ public class UserDBController {
     private static final String URL_SERVER_CORE_USERDB_REQUEST = "http://localhost:8080/userDBRequest";
     private static final String URL_SERVER_CORE_CREATE_USER_REQUEST = "http://localhost:8080/createUserRequest";
     private static final String URL_SERVER_CORE_DELETE_USER_REQUEST = "http://localhost:8080/deleteUserRequest";
+    private static final String URL_SERVER_CORE_UPDATE_USER_REQUEST = "http://localhost:8080/updateUserRequest";
 
     @Autowired
     RestTemplate restTemplate;
@@ -107,6 +108,7 @@ public class UserDBController {
 
             for (UserDBEntry iterator : userDB) {
                 if ( name.equals(iterator.getName()) ) result = 2;
+                else if (name.equals("client") || name.equals("manager") || name.equals("root")) result = 2;
             }
         } // end_else
 
@@ -124,7 +126,7 @@ public class UserDBController {
                         restTemplate.postForEntity(URL_SERVER_CORE_CREATE_USER_REQUEST, requestBody, String.class );
                 Log.info("Status code: "+responseResult.getStatusCode());
                 Log.info( responseResult.getBody() ) ;
-                result = 1;
+//                result = 1;
                 if ( responseResult.getBody().equals("OK")) {
                     result = 1;
                     resultUser = " login:"+name+", password:"+password+", role:"+role;
@@ -161,5 +163,100 @@ public class UserDBController {
         return "userDBPage";
     } // end_method
 
+    @RequestMapping("/updateUserPage")
+    public String updateUserPage(
+            @RequestParam(value="selectUserID",required = false, defaultValue = "0") String currentID,
+            @RequestParam(value="selectUserName",required = false, defaultValue = "0") String currentName,
+            @RequestParam(value="selectUserPassword", required = false) String currentPassword,
+            @RequestParam(value="selectUserRole", required = false,defaultValue = "0") String currentRole,
+            Model model)
+    {
+        model.addAttribute("currentID",currentID);
+        model.addAttribute("currentName",currentName);
+        model.addAttribute("currentPassword",currentPassword);
+        model.addAttribute("currentRole",currentRole);
+        return "updateUserPage";
+    } // end_method
+
+    @RequestMapping("/updateUserRequest")
+    public String updateUserRequest(
+            @RequestParam(value="currentIDUpd",required = false, defaultValue = "0") String currentID,
+            @RequestParam(value="currentNameUpd",required = false, defaultValue = "0") String currentName,
+            @RequestParam(value="currentPasswordUpd", required = false) String currentPassword,
+            @RequestParam(value="currentRoleUpd", required = false,defaultValue = "0") String currentRole,
+
+            @RequestParam(value="newID",required = false, defaultValue = "0") String newID,
+            @RequestParam(value="newName",required = false, defaultValue = "0") String newName,
+            @RequestParam(value="newPassword", required = false) String newPassword,
+            @RequestParam(value="newRole", required = false,defaultValue = "0") String newRole,
+            Model model)
+    {
+        int resultCode = 1;
+        // 0 - заполнены не все поля
+        // 1 - успех
+        // 2 - неуникальное имя
+        // 3 - неверно указана роль
+        // 4 - ошибка БД
+
+        // проверка на заполнение полей
+        if ( newName.equals("0") || newRole.equals("0") ) resultCode = 0;
+        // проверка на корректность роли
+        else if ( !(newRole.equals("ROLE_CLIENT") || newRole.equals("ROLE_MANAGER") || newRole.equals("ROLE_ROOT")) ) resultCode = 3;
+        // проверяем уникальность имени и подключение к БД
+        else {
+            List<UserDBEntry> userDB = new UserDBList().getUserDBList();
+            // запрос к БД - получить лист с пользователями
+            try {
+                HttpEntity<String> requestBody = new HttpEntity<>("readUserDB");
+                ResponseEntity<UserDBList> responseResult =
+                        restTemplate.postForEntity(URL_SERVER_CORE_USERDB_REQUEST, requestBody, UserDBList.class );
+                Log.info("Status code: "+responseResult.getStatusCode());
+                userDB = responseResult.getBody().getUserDBList();
+            }
+            catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+                Log.info( ex.getMessage() );
+                resultCode = 4;
+            }
+            for (UserDBEntry iterator : userDB) {
+                if ( iterator.getName().equals(newName) && (iterator.getId() != Integer.parseInt(currentID)) )
+                    resultCode = 2;
+                //if ( newName.equals(iterator.getName()) && !currentID.equals(iterator.getId()) ) resultCode = 2;
+                else if (newName.equals("client") || newName.equals("manager") || newName.equals("root")) resultCode = 2;
+            }
+        } // end_else
+
+        if ( resultCode == 1 ) {
+            resultCode = 4;
+            // запрос на изменение пользователя
+            UserDBEntry updUser = new UserDBEntry();
+            updUser.setId( Integer.parseInt(currentID) );
+            updUser.setName( newName );
+            updUser.setPassword( newPassword );
+            updUser.setRole( newRole );
+            try {
+                HttpEntity<UserDBEntry> requestBody = new HttpEntity<>(updUser);
+                ResponseEntity<String> responseResult =
+                        restTemplate.postForEntity(URL_SERVER_CORE_UPDATE_USER_REQUEST, requestBody, String.class );
+//                resultCode = 1;
+                if ( responseResult.getBody().equals("OK")) {
+                    resultCode = 1;
+                    currentName = newName;
+                    currentPassword = newPassword;
+                    currentRole = newRole;
+                } // end_if
+            }
+            catch ( ResourceAccessException | HttpClientErrorException | HttpServerErrorException ex ) {
+                Log.info( ex.getMessage() );
+            } // end_try_catch
+        } // end_if
+
+        model.addAttribute("currentID", currentID);
+        model.addAttribute("currentName", currentName);
+        model.addAttribute("currentPassword", currentPassword);
+        model.addAttribute("currentRole", currentRole);
+
+        model.addAttribute("resultCode", resultCode);
+        return "updateUserPage";
+    } // end_method
 
 } // end_class

@@ -38,6 +38,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/userDBPage").hasAnyRole("ROOT")
                     .antMatchers("/createUser","/createUserPage").hasAnyRole("ROOT")
                     .antMatchers("/deleteUserRequest").hasAnyRole("ROOT")
+                    .antMatchers("/updateUserRequest","/updateUserPage").hasAnyRole("ROOT")
                     .anyRequest().authenticated()
                     .and()
                 .formLogin()

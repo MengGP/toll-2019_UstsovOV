@@ -30,7 +30,7 @@ public class ReceiveUserDBRequests {
 
     @RequestMapping(value = "/createUserRequest", method = RequestMethod.POST)
     @ResponseBody
-    public String CreateUser(@RequestBody UserDBEntry newUser) {
+    public String createUser(@RequestBody UserDBEntry newUser) {
         crudUserMethods.create(newUser.getName(), newUser.getPassword(), newUser.getRole(), true );
         String resultStatus = "OK";
         return resultStatus;
@@ -38,8 +38,15 @@ public class ReceiveUserDBRequests {
 
     @RequestMapping(value = "/deleteUserRequest", method = RequestMethod.POST)
     @ResponseBody
-    public String DeleteUser(@RequestBody String deleteUserID){
+    public String deleteUser(@RequestBody String deleteUserID){
         crudUserMethods.deleteWithID( Integer.parseInt(deleteUserID) );
+        return "OK";
+    } // end_method
+
+    @RequestMapping(value = "/updateUserRequest", method = RequestMethod.POST)
+    @ResponseBody
+    public String updateUserRequest(@RequestBody UserDBEntry updUser) {
+        crudUserMethods.updateUserWithID(updUser);
         return "OK";
     } // end_method
 

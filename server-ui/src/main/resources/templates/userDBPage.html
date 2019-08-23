@@ -21,11 +21,19 @@
         <td th:text="${iterator.getName()}"></td>
         <td th:text="${iterator.getPassword()}"></td>
         <td th:text="${iterator.getRole()}"></td>
-        <!-- <td> <a th:href="@{/deleteUserRequest}(selectUserID=${iterator.getId()})" > <button> DELETE </button> </td> -->
         <td>
             <form th:action="@{/deleteUserRequest}">
                 <input th:hidden="${iterator.getId()}" name="selectUserID" th:value="${iterator.getId()}"/>
                 <button> DELETE </button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/updateUserPage}">
+                <input th:hidden="${iterator.getId()}" name="selectUserID" th:value="${iterator.getId()}"/>
+                <input th:hidden="${iterator.getName()}" name="selectUserName" th:value="${iterator.getName()}"/>
+                <input th:hidden="${iterator.getPassword()}" name="selectUserPassword" th:value="${iterator.getPassword()}"/>
+                <input th:hidden="${iterator.getRole()}" name="selectUserRole" th:value="${iterator.getRole()}"/>
+                <button> EDIT </button>
             </form>
         </td>
     </tr>
