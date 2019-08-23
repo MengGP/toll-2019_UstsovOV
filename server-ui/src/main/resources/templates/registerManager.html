@@ -7,6 +7,48 @@
 <body>
 <h1 th:inline="text">Register Manager page</h1>
 <p> К данной странице имеет доступ: ROOT</p>
+
+<p>--------------------------------------------------------</p>
+
+<table>
+    <tr>
+        <th>ID</th>
+        <th>NAME</th>
+        <th>PASSWORD</th>
+        <th>ROLE</th>
+    </tr>
+    <tr th:each="iterator : ${userDB}">
+        <td th:text="${iterator.getId()}"></td>
+        <td th:text="${iterator.getName()}"></td>
+        <!--<td th:text="${iterator.getPassword()}"></td> -->
+        <td>********</td>
+        <td th:text="${iterator.getRole()}"></td>
+        <td>
+            <form th:action="@{/deleteManagerRequest}">
+                <input th:hidden="${iterator.getId()}" name="selectUserID" th:value="${iterator.getId()}"/>
+                <button> DELETE </button>
+            </form>
+        </td>
+        <td>
+            <form th:action="@{/updateManagerPage}">
+                <input th:hidden="${iterator.getId()}" name="selectUserID" th:value="${iterator.getId()}"/>
+                <input th:hidden="${iterator.getName()}" name="selectUserName" th:value="${iterator.getName()}"/>
+                <input th:hidden="${iterator.getPassword()}" name="selectUserPassword" th:value="${iterator.getPassword()}"/>
+                <input th:hidden="${iterator.getRole()}" name="selectUserRole" th:value="${iterator.getRole()}"/>
+                <button> EDIT </button>
+            </form>
+        </td>
+    </tr>
+</table>
+
+
+<p>
+    <a th:href="@{/createManagerPage}">
+        <button> CREATE NEW MANAGER </button>
+    </a>
+</p>
+
+
 <p> Вернуться к "home" <a th:href="@{/home}">тык</a>.</p>
 <form th:action="@{/logout}" method="post">
     <input type="submit" value="Выйти из системы"/>

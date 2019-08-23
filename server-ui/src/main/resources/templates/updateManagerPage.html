@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>UPDATE manager page</title>
+</head>
+
+<body>
+<h1 th:inline="text">Manage page - edit manager</h1>
+<p>--------------------------------------------------------</p>
+
+<!--<p th:text="(${resultCode} == null) ? ' Клиент:' : ''" /> -->
+<p th:text="(${resultCode} == 0) ? ' Заполнены не все поля ' : ''" />
+<p th:text="(${resultCode} == 1) ? ' данные клиента обновлены ' : ''" />
+<p th:text="(${resultCode} == 2) ? ' Неуникальное имя клиента ' : ''" />
+<!--<p th:text="(${resultCode} == 3) ? ' Неверно указана роль ' : ''" /> -->
+<p th:text="(${resultCode} == 4) ? ' Ошибка БД ' : ''" />
+
+<p th:text="'Менеджер:    '+ ${currentName}"/>
+<!--<p th:text="'password: '+ ${currentPassword}"/>
+<p th:text="'role:     '+ ${currentRole}"/> -->
+<p>--------------------------------------------------------</p>
+<p>
+
+<form th:action="@{/updateManagerRequest}">
+    <input type="hidden" name="currentIDUpd" th:value="${currentID}"/>
+    <input type="hidden" name="currentNameUpd" th:value="${currentName}"/>
+    <input type="hidden" name="currentPasswordUpd" th:value="${currentPassword}"/>
+    <!--<input type="hidden" name="currentRoleUpd" th:value="${currentRole}"/>-->
+    <input type="text" name="newName" th:value="${currentName}"/>
+    <input type="password" name="newPassword" th:value="${currentPassword}"/>
+    <!--<input type="text" name="newRole" list="roleList" th:value="${currentRole}"/>
+    <datalist id="roleList">
+        <option>ROLE_CLIENT</option>
+        <option>ROLE_MANAGER</option>
+        <option>ROLE_ROOT</option>
+    </datalist> -->
+    <input th:hidden="${currentID}" name="newID" value="${currentID}"/>
+    <button> UPDATE </button>
+</form>
+
+</p>
+
+
+
+<p> Вернуться к "register manager" <a th:href="@{/registerManager}">тык</a>.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>
