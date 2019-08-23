@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <title>Create user page</title>
+</head>
+
+<body>
+<h1 th:inline="text">Manage page - create user</h1>
+<p>--------------------------------------------------------</p>
+    <p th:text="(${result} == null) ? ' Введите данные нового пользователя' : ''" />
+    <p th:text="(${result} == 0) ? ' Заполнены не все поля' + ${resultUser} : ''" />
+    <p th:text="(${result} == 1) ? ' Пользователь создан' : ''" />
+    <p th:text="(${result} == 2) ? ' Неуникальное имя пользователя ' : ''" />
+    <p th:text="(${result} == 3) ? ' Неверно указана роль ' : ''" />
+    <p th:text="(${result} == 4) ? ' Ошибка БД ' : ''" />
+<p>--------------------------------------------------------</p>
+
+
+<p>
+
+<form th:action="@{/createUser}">
+    <input type="text" name="name"/>
+    <input type="text" name="password"/>
+    <input type="text" name="role" list="roleList"/>
+        <datalist id="roleList">
+            <option>ROLE_CLIENT</option>
+            <option>ROLE_MANAGER</option>
+            <option>ROLE_ROOT</option>
+        </datalist>
+    <button> CREATE </button>
+</form>
+
+</p>
+
+
+
+<p> Вернуться к "user DB page" <a th:href="@{/requestUserDB}">тык</a>.</p>
+<form th:action="@{/logout}" method="post">
+    <input type="submit" value="Выйти из системы"/>
+</form>
+
+</body>
+</html>

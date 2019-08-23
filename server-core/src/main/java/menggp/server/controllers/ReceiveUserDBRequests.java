@@ -1,5 +1,6 @@
 package menggp.server.controllers;
 
+import menggp.dto.UserDBEntry;
 import menggp.dto.UserDBList;
 import menggp.server.dao.CrudUserMethods;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,20 +20,21 @@ public class ReceiveUserDBRequests {
     @ResponseBody
     public UserDBList transmitUserDB(@RequestBody String str) {
         UserDBList userDBList = new UserDBList();
-
         if ( str.equals("readUserDB") ) {
-
             Log.info(" --- readUserDB operation start ");
-
             userDBList = crudUserMethods.readUserDBList();
-
             Log.info( userDBList.getUserDBList().toString() );
-
         } // end_if
-
-
         return userDBList;
-    }
+    } // end_method
+
+    @RequestMapping(value = "/createUserRequest", method = RequestMethod.POST)
+    @ResponseBody
+    public String CreateUser(@RequestBody UserDBEntry newUser) {
+        crudUserMethods.create(newUser.getName(), newUser.getPassword(), newUser.getRole(), true );
+        String resultStatus = "OK";
+        return resultStatus;
+    } // end_method
 
 
 
