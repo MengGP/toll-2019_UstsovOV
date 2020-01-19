@@ -9,15 +9,9 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 import javax.sql.DataSource;
 
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-
-
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-//    private static  final Logger Log = LoggerFactory.getLogger(WebSecurityConfig.class);
 
     @Autowired
     private DataSource dataSource;
@@ -57,8 +51,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
     public void configureGlobal(AuthenticationManagerBuilder auth) throws  Exception {
-        // пользователи "по умолчанию"
 
+        // пользователи "по умолчанию"
         auth
                 .inMemoryAuthentication()
                     .withUser("client").password("client").roles("CLIENT")
@@ -73,11 +67,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
             .dataSource(dataSource)
             .usersByUsernameQuery(getUserQuery())
             .authoritiesByUsernameQuery(getAuthoritiesQuery());
-//            .usersByUsernameQuery("select name, password, enabled from userdata where name=?")
-//            .authoritiesByUsernameQuery("select name, role from userdata where name=? OR name=name");
 
     } // end_method
-
 
     private String getUserQuery() {
         return "SELECT name as username, password, enabled " +

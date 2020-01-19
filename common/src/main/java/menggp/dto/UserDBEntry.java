@@ -38,4 +38,5 @@ public class UserDBEntry {
     public void setRole(String role) {
         this.role = role;
     }
+
 } // end_class

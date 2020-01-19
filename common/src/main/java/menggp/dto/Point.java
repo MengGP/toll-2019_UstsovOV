@@ -3,11 +3,6 @@ package menggp.dto;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.io.IOException;
-
-/**
- *  Copy from toll-2017 on 13.06.2019
- */
 public class Point {
 
     // аттрибуты
@@ -89,6 +84,5 @@ public class Point {
                 ", time="+ time +
                 '}';
     } // end_method
-
 
 } // end_class

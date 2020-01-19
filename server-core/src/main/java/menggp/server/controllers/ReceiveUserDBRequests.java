@@ -8,14 +8,22 @@ import org.springframework.web.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ *  Контроллер обрабатывающий запросы связыные с базйо пользователей
+ *
+ */
 @RestController
 public class ReceiveUserDBRequests {
 
     private static final Logger Log = LoggerFactory.getLogger(ReceiveUserDBRequests.class);
 
+    // связанные классы
+    //------------------------------------------------------------------------
     @Autowired
     CrudUserMethods crudUserMethods;
 
+    // Методы
+    //------------------------------------------------------------------------
     @RequestMapping(value = "/userDBRequest", method = RequestMethod.POST)
     @ResponseBody
     public UserDBList transmitUserDB(@RequestBody String str) {

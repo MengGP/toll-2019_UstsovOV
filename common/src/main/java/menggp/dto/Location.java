@@ -2,8 +2,6 @@ package menggp.dto;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 
-import java.io.IOException;
-
 // класс-оболочка для класса Point
 public class Location {
 
@@ -69,11 +67,5 @@ public class Location {
     public void setInstantSpeed(int instantSpeed) {
         point.setInstantSpeed(instantSpeed);
     }
-
-    // методы
-    //--------------------------------------------------------------------------------------
-//    public static void meth() {}
-
-
 
 } // end_class

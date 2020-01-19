@@ -18,4 +18,5 @@ public class UserDBList {
     public void setUserDBList(List<UserDBEntry> userDBList) {
         this.userDBList = userDBList;
     }
+
 } // end_method

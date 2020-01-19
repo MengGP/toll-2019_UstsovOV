@@ -4,6 +4,10 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.AUTO;
 
+/**
+ *  Описание таблицы Userdata для БД
+ */
+
 @Entity
 @Table(name="userdata")
 public class UserData {
@@ -68,4 +72,5 @@ public class UserData {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
 } // end_class

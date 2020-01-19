@@ -1,9 +1,7 @@
 package menggp.server.security;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.context.annotation.Bean;
@@ -44,18 +42,21 @@ public class Application {
     // точка входа в приложение
     public static void main(String[] args) throws Throwable {
 
+        /*
+           Запускаем web-сервер на порту, отличном от стандартного - 8088,
+           для того чтобы одновременно запускать на хосте web-серверы проетак "server-core" и "server-ui"
+
+            // обычный запуск
+            //SpringApplication.run(Application.class, args);
+
+         */
         HashMap<String,Object> props = new HashMap<>();
         props.put("server.port",8088);
 
-        //SpringApplication.run(Application.class, args);
-        // запускаем в виде SpringBootApplication - но без поднятия web-cервера - т.к. для реализации функционала он не нужен
-        // - т.к. для реализации функционала он не нужен и бужет мешать web-серверу проекта server-core
         new SpringApplicationBuilder(Application.class)
-                //.web(false) // но это не точно
                 .properties(props)
                 .run(args);
-        // обычный запуск
-        //SpringApplication.run(Application.class, args);
+
 
     } // end_main
 

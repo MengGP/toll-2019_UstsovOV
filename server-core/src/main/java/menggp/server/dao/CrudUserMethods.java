@@ -65,7 +65,7 @@ public class CrudUserMethods {
             Log.info("NO RECORDS");
         }
         else {
-            all.stream().forEach(userData -> delete(userData) );// log.info(userData.toString()));
+            all.stream().forEach(userData -> delete(userData) );
         }
     } // end_method
     
@@ -75,10 +75,6 @@ public class CrudUserMethods {
 
 
         all = (List<UserData>) userDataRepository.findAll();
-
-//        for (int i=0; i<all.size(); i++) {
-//            userDB.add()
-//        }
 
         for (UserData iterator : all ) {
            UserDBEntry userDBEntry = new UserDBEntry();

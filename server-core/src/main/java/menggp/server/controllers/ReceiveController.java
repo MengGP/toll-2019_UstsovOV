@@ -1,7 +1,6 @@
 package menggp.server.controllers;
 
 import menggp.server.dao.CrudMethods;
-import menggp.server.dao.LocationEntity;
 import menggp.server.dao.repo.LocationsRepository;
 import menggp.server.services.WriteLocationService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,14 +28,6 @@ public class ReceiveController {
 
     @Autowired
     LocationsRepository locationsRepository;
-
-     /*
-     * тест доступности контекста
-    @RequestMapping("/location")
-    public String receiveLocation() {
-        System.out.println(" --- context available --- ");
-        return "It's os good";
-    }*/
 
     // Методы
     //------------------------------------------------------------------------

@@ -1,7 +1,6 @@
 package menggp.server.controllers;
 
 import menggp.server.dao.CrudMethods;
-import menggp.server.dao.CrudUserMethods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,9 +11,13 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 public class ReceivePointsRequest {
 
+    // связанные классы
+    //------------------------------------------------------------------------
     @Autowired
     private CrudMethods crudMethods;
 
+    // Методы
+    //------------------------------------------------------------------------
     @RequestMapping(value = "/pointsRequest",method = RequestMethod.POST)
     @ResponseBody
     public String transmitLocations(@RequestBody String str) {

@@ -46,9 +46,6 @@ public class UserDBController {
             ResponseEntity<UserDBList> responseResult =
                     restTemplate.postForEntity(URL_SERVER_CORE_USERDB_REQUEST, requestBody, UserDBList.class );
             Log.info("Status code: "+responseResult.getStatusCode());
-//            Log.info( responseResult.getBody().toString() ) ;
-//            Log.info( responseResult.getBody().getUserDBList().get(0).getName() );
-//            Log.info( responseResult.getBody().getUserDBList().get(1).getName() );
 
             userDB = responseResult.getBody().getUserDBList();
         }
@@ -119,7 +116,7 @@ public class UserDBController {
                         restTemplate.postForEntity(URL_SERVER_CORE_CREATE_USER_REQUEST, requestBody, String.class );
                 Log.info("Status code: "+responseResult.getStatusCode());
                 Log.info( responseResult.getBody() ) ;
-//                result = 1;
+
                 if ( responseResult.getBody().equals("OK")) {
                     result = 1;
                     resultUser = " login:"+name+", password:"+password+", role:"+role;
@@ -217,7 +214,6 @@ public class UserDBController {
             for (UserDBEntry iterator : userDB) {
                 if ( iterator.getName().equals(newName) && (iterator.getId() != Integer.parseInt(currentID)) )
                     resultCode = 2;
-                //if ( newName.equals(iterator.getName()) && !currentID.equals(iterator.getId()) ) resultCode = 2;
                 else if (newName.equals("client") || newName.equals("manager") || newName.equals("root")) resultCode = 2;
             }
         } // end_else
@@ -234,7 +230,7 @@ public class UserDBController {
                 HttpEntity<UserDBEntry> requestBody = new HttpEntity<>(updUser);
                 ResponseEntity<String> responseResult =
                         restTemplate.postForEntity(URL_SERVER_CORE_UPDATE_USER_REQUEST, requestBody, String.class );
-//                resultCode = 1;
+
                 if ( responseResult.getBody().equals("OK")) {
                     resultCode = 1;
                     currentName = newName;

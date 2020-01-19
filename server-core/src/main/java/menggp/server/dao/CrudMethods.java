@@ -1,8 +1,6 @@
 package menggp.server.dao;
 
-import menggp.server.dao.LocationEntity;
 import menggp.server.dao.repo.LocationsRepository;
-import menggp.server.springApp.Application;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,7 +54,7 @@ public class CrudMethods {
             log.info("NO RECORDS");
         }
         else {
-            all.stream().forEach(locationEntity -> delete(locationEntity) );// log.info(locationEntity.toString()));
+            all.stream().forEach(locationEntity -> delete(locationEntity) );
         }
     } // end_method
 
@@ -64,13 +62,6 @@ public class CrudMethods {
         String result="";
 
         all = (List<LocationEntity>) locationsRepository.findAll();
-
-        /*
-        // вернуть все записи таблицы
-        for ( LocationEntity iterator : all ) {
-            result = result + iterator.getLocationString();
-        }
-        */
 
         // возвращаем строку с N последними записями из таблицы, в обратном порядке, от младшей (нижней) к старшей
         int max = all.size() - 1;
