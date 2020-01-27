@@ -47,6 +47,4 @@ public class TrackerCoreContext {
         return scheduler;
     }
 
-
-
 }

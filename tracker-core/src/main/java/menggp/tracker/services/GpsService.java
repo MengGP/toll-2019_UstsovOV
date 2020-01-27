@@ -123,21 +123,9 @@ public class GpsService {
 
     } // end_method
 
-
-
     // метод складывает GPS-данные из трека в очередь, предоставляемую сервисом StoreService
     @Scheduled(fixedRateString = "${gpsDataDelay.prop}", initialDelayString = "${storeInitialDelay.prop}")
     private void putCurrentGpsData() throws Exception {
-        /*Location currentGpsData = new Location();
-        currentGpsData.setLat( (int)(Math.random()*91) +0 );
-        currentGpsData.setLon( (int)(Math.random()*91) +0 );
-        currentGpsData.setAzimuth( (int)(Math.random()*361) +0 );
-        currentGpsData.setInstantSpeed( (int)(Math.random()*91) +0 );
-        currentGpsData.setTime( System.currentTimeMillis() );
-        currentGpsData.setAutoId("o567gfd");
-        */
-
-        // storeService.putToQueue( currentGpsData.toJson() );
 
         if ( trackPointIterator < trackPoints.size() ) {
            storeService.putToQueue( trackPoints.get(trackPointIterator).toJson() );

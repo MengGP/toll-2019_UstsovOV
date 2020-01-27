@@ -44,13 +44,6 @@ public class SendService {
 
     // методы
     //------------------------------------------------------------------------
-    /*
-    *    метод заменен на метод отправляющий координаты на сервере в виде REST запроса
-    @Scheduled (fixedDelayString = "${takeQueueDelay.prop}")
-    public void sendLocations() throws InterruptedException {
-        while ( storeService.sizeOfQueue() > 0 ) Log.info( storeService.takeFromQueue() );
-    } // end_method
-    */
 
     @Scheduled (fixedDelayString = "${takeQueueDelay.prop}", initialDelayString = "${initialDelayPOST.prop}")
     public void sentLocationPOSTRequst() throws InterruptedException {

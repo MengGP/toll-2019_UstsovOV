@@ -43,13 +43,13 @@ public class Application implements CommandLineRunner {
 
     // точка входа Spring-boot приложения
     public static void main(String[] args) {
-        // запускаем в виде SpringBootApplication - но без поднятия web-cервера - т.к. для реализации функционала он не нужен
-        // - т.к. для реализации функционала он не нужен и бужет мешать web-серверу проекта server-core
+        // запускаем в виде SpringBootApplication - но без поднятия web-cервера
+        //      - т.к. для реализации функционала он не нужен и бужет мешать web-серверу проекта server-core
         new SpringApplicationBuilder(Application.class)
                 .web(false)
                 .run(args);
         // обычный запуск
-        //SpringApplication.run(Application.class, args);
+            // SpringApplication.run(Application.class, args);
     } // end_main
 
     @Bean       // сервис генерации данных GPS
@@ -91,18 +91,8 @@ public class Application implements CommandLineRunner {
         return new CrudMethods();
     } // end_bean
 
-//    @Autowired
-//    private CrudMethods crudMethods;
-
     @Override
     public void run(String... args) throws Exception {
-        /*
-        // очистка таблицы при старте приложения
-        crudMethods.flushTable();
-        crudMethods.create(1,2,3,4,5,"str");
-        crudMethods.read();
-        */
-
     } // end_method
 
 
