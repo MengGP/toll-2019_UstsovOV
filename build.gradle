@@ -117,18 +117,6 @@ project(':tracker-core'){
        }
 }
 
-// --- субпроект "tracker-ui"
-project(':tracker-ui'){
-    dependencies {
-        compile project(':common')
-        testCompile project(':common')
-    }
-
-    dependencies{
-            compile project(':common')
-        }
-}
-
 // --------------------------------------------------------------
 
 // репозитории и зависимости для работы gradle-one-jar
