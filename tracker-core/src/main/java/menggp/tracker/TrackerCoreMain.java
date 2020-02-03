@@ -11,6 +11,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
  *  Класс содержащий метод main субпроекта Tracker-core
  */
 
+@Deprecated
 public class TrackerCoreMain {
 
     public static void main(String args[]) throws InterruptedException {

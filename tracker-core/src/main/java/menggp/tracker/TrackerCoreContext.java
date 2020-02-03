@@ -19,6 +19,7 @@ import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
  *      описываем Bean-ы для сервисов и расписания
  */
 
+@Deprecated
 @Configuration
 @EnableScheduling
 @PropertySource("classpath:/app.properties")

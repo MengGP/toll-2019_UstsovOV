@@ -9,7 +9,7 @@ import java.util.List;
 
 
 /**
- *  Метод реализует CRUD операции для работы с DB в проекте server-core
+ *  Метод реализует CRUD операции для работы с DB в проекте tracker-core
  *      Create
  *       Read
  *        Update

@@ -28,7 +28,7 @@ import org.springframework.web.context.WebApplicationContext;
  *      Класс содержащий точку входа Spring-boot приложения
  *
  *      - т.к. заменяет фунуионал классов TrackerCoreContext и TrackerCoreMain
- *      поаналогии, переносим сюда beans и необходимые аннотации
+ *      по аналогии, переносим сюда beans и необходимые аннотации
  *
  */
 
